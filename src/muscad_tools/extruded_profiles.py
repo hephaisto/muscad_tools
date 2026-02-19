@@ -2,7 +2,7 @@ from enum import StrEnum, auto
 
 from muscad import E, EE, T, Cube, Volume, Cylinder, Part, Sphere, Circle, Square, Text, Polygon, Object, Union
 
-from mctools.helpers import DataTable
+from .helpers import DataTable
 
 class ProfileType(StrEnum):
     b20n6 = auto()
