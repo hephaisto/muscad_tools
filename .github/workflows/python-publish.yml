@@ -49,14 +49,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        env: [test, official]
+        env:
+          - test
+          - official
         include:
           - env: test
             env_name: testpypi
             repo_url: https://test.pypi.org/legacy/
-          - env: official
-            env_name: pypi
-            repo_url: https://pypi.org/legacy/
+#          - env: official
+#            env_name: pypi
+#            repo_url: https://pypi.org/legacy/
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
     needs:
       - release-build
