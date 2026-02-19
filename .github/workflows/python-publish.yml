@@ -51,7 +51,7 @@ jobs:
       matrix:
         env:
           - test
-          - official
+#          - official
         include:
           - env: test
             env_name: testpypi
