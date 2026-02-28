@@ -52,6 +52,8 @@ jobs:
         env:
           - test
           - official
+        isDevTag:
+          - ${{ contains(github.ref, 'dev') }}
         include:
           - env: test
             env_name: testpypi
@@ -59,7 +61,10 @@ jobs:
           - env: official
             env_name: pypi
             repo_url: https://pypi.org/legacy/
-    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags') && (!contains(github.ref, 'dev') || startsWith(${{matrix.env}}, 'test'))
+        exclude:
+          - isDevTag: true
+            env: official
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
     needs:
       - release-build
     permissions:
