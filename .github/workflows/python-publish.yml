@@ -50,20 +50,13 @@ jobs:
     strategy:
       matrix:
         env:
-          - test
-          - official
+          - testpypi
+          - pypi
         isDevTag:
           - ${{ contains(github.ref, 'dev') }}
-        include:
-          - env: test
-            env_name: testpypi
-            repo_url: https://test.pypi.org/legacy/
-          - env: official
-            env_name: pypi
-            repo_url: https://pypi.org/legacy/
         exclude:
           - isDevTag: true
-            env: official
+            env: pypi
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
     needs:
       - release-build
@@ -71,7 +64,7 @@ jobs:
       id-token: write
 
     environment:
-      name: ${{matrix.env_name}}
+      name: ${{matrix.env}}
 
     steps:
       - name: Retrieve release distributions
@@ -84,4 +77,4 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           packages-dir: dist/
-          repository-url: ${{matrix.repo_url}}
+          repository-url: ${{REPO_URL}}
