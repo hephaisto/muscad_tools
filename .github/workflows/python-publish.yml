@@ -77,4 +77,4 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           packages-dir: dist/
-          repository-url: ${{REPO_URL}}
+          repository-url: ${{vars.REPO_URL}}
